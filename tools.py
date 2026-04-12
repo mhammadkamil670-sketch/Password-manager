@@ -2,7 +2,7 @@ from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 import os
 from databases import get_secretkey
-load_dotenv("/storage/emulated/0/apasswords/.env")
+load_dotenv()
 def get_cipher():
     key=os.getenv("SECRET_KEY")
     cipher=Fernet(key.encode())
