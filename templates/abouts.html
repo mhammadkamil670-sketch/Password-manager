@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Page</title>
+  <style>
+    /* Global Reset & Box Sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e0e7ff, #f8fafc);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Card Container */
+    #abouts {
+      width: 100%;
+      max-width: 800px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Headings */
+    #aboutit, #title, #disclaimer {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #1e293b;
+    }
+
+    /* Paragraphs */
+    #tool, #info1, #info, #disclaimer1 {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    /* Lists */
+    ul {
+      padding-left: 20px;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* Button Container */
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #continue {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    #continue:hover {
+      background-color: #2563eb;
+      transform: scale(1.05);
+    }
+
+    #back {
+      background-color: #e2e8f0;
+      color: #1e293b;
+    }
+
+    #back:hover {
+      background-color: #cbd5e1;
+      transform: scale(1.05);
+    }
+
+    /* Responsive Typography */
+    @media (max-width: 600px) {
+      #aboutit, #title, #disclaimer {
+        font-size: 1.25rem;
+      }
+
+      #tool, #info1, #info, #disclaimer1 {
+        font-size: 0.95rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="abouts">
+
+    <p id="aboutit"><strong>About This App</strong></p>
+
+    <p id="tool">This application is a simple tool to generate random passwords and check the strength of passwords you enter. It's mainly for learning and experimentation, showing what makes a password stronger or weaker.</p>
+
+    <p id="info1">The password strength checker looks at factors like length, character variety, and randomness to give a rough estimate of security. This is not a professional assessment and may not reflect real-world safety.</p>
+
+    <p id="title"><strong>Important Notice</strong></p>
+
+    <p id="info">This is an incomplete project and should not be used for any critical accounts or sensitive information. Avoid entering real passwords, including:</p>
+    <ul id="disc">
+      <li>Banking or financial account passwords</li>
+      <li>Email account passwords</li>
+      <li>Social media login credentials</li>
+      <li>Work or personal authentication passwords</li>
+      <li>Any password connected to important or private services</li>
+    </ul>
+
+    <p id="disclaimer"><strong>Disclaimer</strong></p>
+    <p>By using this app, you agree that:</p>
+    <ul id="info2">
+      <li>It may have bugs or security weaknesses.</li>
+      <li>Password strength results may be inaccurate.</li>
+      <li>The app does not guarantee safety or protection of any information.</li>
+      <li>The developer is not responsible for any loss, damage, or misuse.</li>
+    </ul>
+
+    <p id="disclaimer1">Use this tool only for testing, learning, or experimentation with password security.</p>
+
+    <div class="button-container">
+      <button id="back" onclick="window.location.href='/'">Back</button>
+      <button id="continue" onclick="window.location.href='/next2'">Next</button>
+    </div>
+
+  </div>
+</body>
+</html>
