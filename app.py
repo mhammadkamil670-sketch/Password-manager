@@ -5,7 +5,7 @@ from passwordhandler import password_gen,savepassword,passwordcheck,queryfortitl
 from databases import tablecreation,getuserpasses,deletepass
 from dotenv import load_dotenv
 import os
-load_dotenv(".env")
+load_dotenv()
 app=Flask(__name__)
 key=os.getenv("SESSION_KEY")
 app.secret_key=key
