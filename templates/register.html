@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div class="bg-white rounded-xl shadow-lg w-11/12 max-w-md p-6 relative">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-4">Hello There</h1>
+    <p class="text-gray-700 text-center mb-6">Please type the username and password to create an account</p>
+
+    <input type="text" id="username" placeholder="Username" class="w-full mb-4 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <input type="password" id="password" placeholder="Password" class="w-full mb-4 p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+    <button id="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded font-semibold transition-all">Create Account</button>
+
+    <p id="message" class="text-center text-gray-700 mt-4"></p>
+  </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const submitBtn = document.getElementById("submit");
+  const messageBox = document.getElementById("message");
+
+  submitBtn.addEventListener("click", async () => {
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+    messageBox.innerText = "Loading...";
+
+    if (!username || !password) {
+      messageBox.innerText = "Please fill in both fields!";
+      return;
+    }
+    if (username.length <8 || password.length<8){
+      messageBox.innerText="Username and password should not be less than 8 characters"
+      return
+    }
+    if (username.length>30){
+      messageBox.innerText="Username should not exceed 30 characters"
+    return
+    }
+    if (password.length>30){
+      messageBox.innerText="Password should not exceed 30 characters"
+    }
+    
+    try {
+      const response = await fetch("/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+      });
+
+      const data = await response.json();
+      messageBox.innerText = data.message;
+      if (data.success===true){
+        window.location.href="/passwords"
+      }
+
+    } catch (err) {
+      messageBox.innerText = "ERROR: Connection failed";
+    }
+  });
+});
+</script>
+
+</body>
+</html>
