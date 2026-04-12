@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 flex flex-col gap-6">
+    
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-center text-gray-800">LOG IN</h1>
+    
+    <!-- Username Input -->
+    <input id="username" type="text" placeholder="Username"
+           class="w-full px-4 py-3 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+
+    <!-- Password Input -->
+    <input id="password" type="password" placeholder="Password"
+           class="w-full px-4 py-3 border rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+
+    <!-- Error Message -->
+    <p id="text" class="text-red-600 font-semibold text-center"></p>
+
+    <!-- Login Button -->
+    <button id="send"
+            class="w-full py-3 bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-700 hover:scale-105 transition-transform">
+      LOG IN
+    </button>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("username")
+      const input2 = document.getElementById("password")
+      const btn = document.getElementById("send")
+      const errorText = document.getElementById("text")
+
+      btn.addEventListener("click", (e) => {
+        e.preventDefault()  // stop page reload if inside a form
+
+        const username = input.value.trim()
+        const password = input2.value.trim()
+
+        if (!username || !password) {
+          errorText.innerText = "Please enter both username and password"
+          return
+        }
+
+        fetch("/login", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({username, password})
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.loggedin === true) {
+            window.location.href = "/passwords"
+          } else {
+            errorText.innerText = data.message || "Login failed"
+          }
+        })
+        .catch(err => {
+          errorText.innerText = "ERROR: Could not connect"
+          console.error(err)
+        })
+      })
+    })
+  </script>
+
+</body>
+</html>
+  
