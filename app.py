@@ -56,7 +56,6 @@ def index2():
         return redirect("/")
     username=session["user"]
     passwords=getuserpasses(username)
-    print(passwords)
     return render_template("passwordhandling.html",passwords=passwords)
 @app.route("/passwords",methods=["POST"])    
 def passwordhandling():
@@ -65,7 +64,6 @@ def passwordhandling():
     data=request.get_json()
     username=session["user"]
     message=data.get("message")
-    print(message)
     if "generate" in message:
         infoforpass=message.split()
         passleng=infoforpass[1]
@@ -83,7 +81,6 @@ def passwordhandling():
             passw=passw[0]
         except:
             return jsonify({"error":"ERROR"}),400
-        print(passw)
         deletepass(username,passw) 
         return jsonify({"message":"Deleted successfully"})
 @app.route("/logout",methods=["GET"])
