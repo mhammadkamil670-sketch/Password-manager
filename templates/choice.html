@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next..</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-green-600 to-green-300 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full p-10 flex flex-col items-center gap-8 text-center">
+    
+    <!-- Heading -->
+    <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900">
+      WELCOME!
+    </h1>
+
+    <!-- Description -->
+    <p class="text-gray-700 text-lg md:text-xl leading-relaxed max-w-2xl">
+      Please enter your details to get started. If you don’t have an account yet, register now to continue.
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex flex-col md:flex-row gap-6 w-full justify-center">
+      <button 
+        onclick="window.location.href='/register'" 
+        class="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-blue-700 hover:scale-105 transition-transform text-lg md:text-xl font-semibold">
+        Register
+      </button>
+      <button 
+        onclick="window.location.href='/login'" 
+        class="bg-green-600 text-white px-8 py-3 rounded-lg shadow-lg hover:bg-green-700 hover:scale-105 transition-transform text-lg md:text-xl font-semibold">
+        Login
+      </button>
+    </div>
+
+  </div>
+
+</body>
+</html>
