@@ -36,7 +36,3 @@ def get_max_index(username):
             return 0
         else:
             return index
-with sqlite3.connect("passwords.db") as con:
-    f=con.cursor()
-    f.execute("SELECT * FROM passwords")
-    print(f.fetchall())        
