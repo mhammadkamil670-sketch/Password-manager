@@ -8,7 +8,7 @@ sslmode="require")
 def something():
     from tools import decryption_master,decryption_student
 def getuserpasses(username):
-    from tools2 import decryption_student
+    from tools import decryption_student
     con=get_con()
     f=con.cursor()
     try:
