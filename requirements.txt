@@ -2,3 +2,4 @@ flask
 python-dotenv
 cryptography
 gunicorn
+psycopg2-binary
