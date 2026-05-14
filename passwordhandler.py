@@ -1,6 +1,5 @@
-import sqlite3
 import random
-from databases import get_max_index
+from databases import get_max_index,get_con
 from tools import encryption_student,decryption_student
 def password_gen(length=8):
     length=int(length)
@@ -24,14 +23,18 @@ def password_gen(length=8):
         password="".join(password)
         return password
 def savepassword(username,password,title):
-    current_m_index=get_max_index(username)
-    with sqlite3.connect("passwords.db") as con:
-        password_enc=encryption_student(password,username)
-        f=con.cursor()
+    current_m_index = get_max_index(username)
+    con = get_con()
+    password_enc = encryption_student(password, username)
+    f = con.cursor()
+    try:
         new_max_index=current_m_index+1
-        f.execute("INSERT INTO passwords(username,passwords,titles,password_id) VALUES (?,?,?,?)",(username,password_enc,title,new_max_index))
+        f.execute("INSERT INTO passwords(username,passwords,titles,password_id) VALUES (%s,%s,%s,%s)",(username,password_enc,title,new_max_index))
         con.commit()
-    return new_max_index
+        return new_max_index
+    finally:
+        con.close()
+        f.close()    
 def passwordcheck(password):
     score=0
     if len(password)<8:
@@ -70,10 +73,14 @@ def passwordcheck(password):
     else:
         return "PASSWORD IS SECURE"
 def queryfortitle(username,password_id):
-    with sqlite3.connect("passwords.db") as con:
-        f=con.cursor()
-        f.execute("SELECT titles FROM passwords WHERE username=? AND password_id=?",(username,password_id))
+    con=get_con()
+    f=con.cursor()
+    try:
+        f.execute("SELECT titles FROM passwords WHERE username=%s AND password_id=%s",(username,password_id))
         titles=f.fetchall()[0]
         if not titles:
             return "ERROR"
         return titles
+    finally:
+        con.close()
+        f.close()    
