@@ -4,7 +4,7 @@ load_dotenv()
 def get_con():
     return psycopg2.connect(os.getenv("db_url"))
 def something():
-    from tools2 import decryption_master,decryption_student
+    from tools import decryption_master,decryption_student
 def getuserpasses(username):
     from tools2 import decryption_student
     con=get_con()
