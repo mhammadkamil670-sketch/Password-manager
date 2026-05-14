@@ -2,10 +2,10 @@ from flask import Flask,request,render_template,jsonify,session,redirect
 import os
 from authentications import register,login
 from passwordhandler import password_gen,savepassword,passwordcheck,queryfortitle
-from databases import tablecreation,getuserpasses,deletepass
+from databases import getuserpasses,deletepass
 from dotenv import load_dotenv
 import os
-tablecreation()
+from tools import check_session,check_pass_title
 load_dotenv()
 app=Flask(__name__)
 key=os.getenv("SESSION_KEY")
@@ -89,7 +89,20 @@ def logout():
     if not "user" in session:
         return redirect("/") 
     session.pop("user",None)    
-    return redirect("/")      
+    return redirect("/")
+@app.route("/save_password",methods=["POST,GET"])  
+def save_password():
+    check_session()
+    data=request.get_json()
+    password=data.get("password")    
+    title=data.get("title") 
+    error=check_pass_title(title,password)
+    if error:
+        return jsonify({"ERROR":error})
+    else:
+        username=session["user"]
+        savepassword(username,password,title)   
+        return jsonify({"status":True})      
 if __name__ == "__main__":
     tablecreation()
     port = int(os.environ.get("PORT", 5000))
