@@ -90,7 +90,7 @@ def logout():
         return redirect("/") 
     session.pop("user",None)    
     return redirect("/")
-@app.route("/save_password",methods=["POST,GET"])  
+@app.route("/save_password",methods=["POST","GET"])  
 def save_password():
     check_session()
     data=request.get_json()
