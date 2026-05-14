@@ -2,8 +2,9 @@ from dotenv import load_dotenv
 import psycopg2
 import os
 load_dotenv()
+print(os.getenv("DATABASE_URL2_0)
 def get_con():
-    return psycopg2.connect(print(os.getenv("DATABASE_URL2_0")),
+    return psycopg2.connect(os.getenv("DATABASE_URL2_0"),
 sslmode="require")
 def something():
     from tools import decryption_master,decryption_student
