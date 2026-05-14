@@ -3,7 +3,8 @@ import psycopg2
 import os
 load_dotenv()
 def get_con():
-    return psycopg2.connect(os.getenv("db_url"))
+    return psycopg2.connect(os.getenv("db_url"),
+sslmode="require")
 def something():
     from tools import decryption_master,decryption_student
 def getuserpasses(username):
